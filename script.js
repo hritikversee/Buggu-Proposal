@@ -1,84 +1,62 @@
-const intro =
-document.getElementById(
-"intro"
-);
+const intro=document.getElementById("intro");
+const question=document.getElementById("question");
+const success=document.getElementById("success");
 
-const question =
-document.getElementById(
-"question"
-);
+const openBtn=document.getElementById("openBtn");
+const yes=document.getElementById("yes");
+const no=document.getElementById("no");
 
-const success =
-document.getElementById(
-"success"
-);
+const flash=document.getElementById("flash");
 
-const flash =
-document.getElementById(
-"flash"
-);
+question.style.display="none";
+success.style.display="none";
 
-const openBtn =
-document.getElementById(
-"openBtn"
-);
+openBtn.addEventListener("click",()=>{
 
-const yes =
-document.getElementById(
-"yes"
-);
+intro.style.transition=".8s";
 
-const no =
-document.getElementById(
-"no"
-);
-
-openBtn.addEventListener(
-"click",
-()=>{
-
-intro.style.opacity=0;
+intro.style.opacity="0";
 
 setTimeout(()=>{
 
-intro.style.display=
-"none";
+intro.style.display="none";
 
-question.style.opacity=1;
+question.style.display="flex";
 
-question.style.pointerEvents=
-"all";
+requestAnimationFrame(()=>{
+
+question.style.opacity="1";
+
+question.style.pointerEvents="all";
+
+});
 
 },700);
 
-}
-);
+});
 
 function move(){
 
-no.style.position=
-"fixed";
+no.style.position="fixed";
 
 no.style.left=
-
 Math.random()
 *
 (
 window.innerWidth
 
-150
+140
 )
 +
 "px";
 
 no.style.top=
-
 Math.random()
 *
 (
 window.innerHeight
 
-120
+100
 )
 +
 "px";
@@ -86,7 +64,7 @@ window.innerHeight
 }
 
 no.addEventListener(
-"mouseover",
+"mouseenter",
 move
 );
 
@@ -105,58 +83,47 @@ yes.addEventListener(
 "click",
 ()=>{
 
-flash.style.opacity=1;
+flash.style.opacity="1";
 
-createHearts();
+burst();
 
 setTimeout(()=>{
 
-question.style.opacity=0;
+question.style.display="none";
 
-question.style.pointerEvents=
-"none";
+success.style.display="flex";
 
-success.style.opacity=1;
+success.style.opacity="1";
 
-success.style.pointerEvents=
-"all";
+flash.style.opacity="0";
 
-flash.style.opacity=0;
-
-},1000);
+},1200);
 
 }
 );
 
-function createHearts(){
+function burst(){
 
-for(
-let i=0;
-i<90;
-i++
-){
+for(let i=0;i<90;i++){
 
-let h =
+const h=
 document.createElement(
 "div"
 );
 
-h.innerHTML=
-"💗";
+h.innerHTML="💗";
 
 h.style.cssText=`
 
 position:fixed;
 
-left:
-${Math.random()*100}vw;
+left:${Math.random()*100}vw;
 
 top:100vh;
 
-font-size:
-${18+Math.random()*40}px;
+font-size:${20+Math.random()*30}px;
 
-transition:2.6s;
+transition:2s;
 
 pointer-events:none;
 
@@ -164,37 +131,35 @@ z-index:999;
 
 `;
 
-document.body.appendChild(
-h
-);
+document.body.appendChild(h);
 
 setTimeout(()=>{
 
 h.style.transform=
-"translateY(-130vh) translateX( ${ (Math.random()-0.5) *300 }px ) rotate(720deg)";
+"translateY(-140vh) translateX(${(Math.random()-.5)*300}px) rotate(720deg)";
 
 h.style.opacity=0;
 
-},30);
+},50);
 
 setTimeout(()=>{
 
 h.remove();
 
-},3000);
+},2500);
 
 }
 
 }
 
-const layer =
+const layer=
 document.querySelector(
 ".heart-bg"
 );
 
-function bgHeart(){
+function heart(){
 
-let h =
+const h=
 document.createElement(
 "div"
 );
@@ -206,17 +171,12 @@ h.innerHTML=
 "💗";
 
 h.style.left=
-Math.random()
-*
-100
-+
-"%";
+Math.random()*100+"%";
 
 h.style.fontSize=
 (
-12+
-Math.random()
-*18
+14+
+Math.random()*18
 )
 +
 "px";
@@ -224,84 +184,31 @@ Math.random()
 h.style.animationDuration=
 (
 14+
-Math.random()
-*16
+Math.random()*12
 )
 +
 "s";
 
-layer.appendChild(
-h
-);
+layer.appendChild(h);
 
 setTimeout(()=>{
 
 h.remove();
 
-},30000);
+},26000);
 
 }
 
-for(
-let i=0;
-i<18;
-i++
-){
+for(let i=0;i<16;i++){
 
 setTimeout(
-bgHeart,
-i*400
-);
-
-}
-
-setInterval(
-bgHeart,
-1200
-);h.style.fontSize=
-(
-12+
-Math.random()
-*20
-)
-+
-"px";
-
-h.style.animationDuration=
-(
-12+
-Math.random()
-*18
-)
-+
-"s";
-
-layer.appendChild(
-h
-);
-
-setTimeout(()=>{
-
-h.remove();
-
-},30000);
-
-}
-
-for(
-let i=0;
-i<16;
-i++
-){
-
-setTimeout(
-bgHeart,
+heart,
 i*500
 );
 
 }
 
 setInterval(
-bgHeart,
-1100
+heart,
+1000
 );
